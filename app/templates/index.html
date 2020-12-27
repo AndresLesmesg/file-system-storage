@@ -1,0 +1,14 @@
+{% extends "base_template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+    {% for element in info %}
+        <h3>
+            {{ element|e }}
+        </h3>
+    {% endfor %}
+
+{% endblock %}
+
