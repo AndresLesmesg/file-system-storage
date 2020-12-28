@@ -1,0 +1,17 @@
+{% extends "base_template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="container center">
+        <p class="display-3">{{title}}</p>
+        <img src="/media/{{ path }}" class="img-fluid" alt="Responsive image" alt="" srcset="">    
+    
+        <div class="btn-group btn-block container">
+            <button class="btn btn-outline-primary btn-lg" >preview</button> 
+            <button class="btn btn-outline-primary btn-lg" >next</button> 
+        </div>
+    </div>
+    
+{% endblock %}
+

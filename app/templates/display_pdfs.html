@@ -1,0 +1,18 @@
+{% extends "base_template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="container center ">
+        <p class="display-3">{{title}}</p>
+        <div class="embed-responsive embed-responsive-16by9">
+            <embed class="embed-responsive-item" src="/media/{{ path }}" type="application/pdf" width="100%" height="720" allowfullscreen>  
+        </div>
+        <div class="btn-group btn-block container">
+            <button class="btn btn-outline-primary btn-lg" >preview</button> 
+            <button class="btn btn-outline-primary btn-lg" >next</button> 
+        </div>
+    </div>
+    
+{% endblock %}
+
