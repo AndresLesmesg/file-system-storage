@@ -1,4 +1,9 @@
+from os import getenv
+
+DIR = getenv('HOME')
+DIR += '/Documentos/'
+
+
 class Config():
     SECRET_KEY = 'secret value'
-    ENV = 'development'
-    DEBUG = 1
+    DEBUG = True
