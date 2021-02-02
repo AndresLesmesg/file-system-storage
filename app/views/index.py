@@ -1,13 +1,13 @@
 from flask import render_template
 
-from .utility import get_content, get_pages
+from app.src.utils import get_content_dir, get_pages
 from . import views
 
 
 @views.route('/')
 def index():
 
-    data = get_content('/')
+    data = get_content_dir('/')
     pages = get_pages(data)
     data = pages[0]
 
@@ -19,4 +19,9 @@ def index():
         'next': None
     }
 
-    return render_template('index.html', data=data, path='/', title='Home', info=info)
+    return render_template(
+        'index.html',
+        data=data,
+        path='/',
+        title='Home',
+        info=info)

@@ -1,7 +1,7 @@
 from flask import Flask
 
 from .config import Config
-from .views.utility import DOCUMENTS
+from .src.utils import DOCUMENTS
 
 
 def create_app():

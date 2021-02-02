@@ -1,6 +1,6 @@
 from flask import send_from_directory
 
-from .utility import DOCUMENTS
+from app.src.utils import DOCUMENTS
 from . import views
 
 

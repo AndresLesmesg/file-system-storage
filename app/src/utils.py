@@ -4,7 +4,7 @@ DOCUMENTS = os.getenv('HOME')
 DOCUMENTS += '/Documentos/'
 
 
-def get_title(path):
+def get_end_path(path):
 
     if(path.endswith("/") and len(path) > 1):
         path = path.rstrip('/')
@@ -18,24 +18,49 @@ def get_title(path):
     return title
 
 
-def get_content(path):
+def get_content_dir(path):
+
     if (path != '/'):
         path = str(DOCUMENTS + path)
-        if (os.path.exists(path=path)):
-            data = os.listdir(path)
+        if (os.path.exists(path)):
+            content = os.listdir(path)
         else:
-            data = 'error value'
+            content = None
     else:
-        data = os.listdir(DOCUMENTS)
-    if(data is not None):
-        data.sort()
+        content = os.listdir(DOCUMENTS)
 
-    return data
+    if(content is not None):
+        content.sort()
+        content = sort_by_type(content, path)
+
+    return content
+
+
+def sort_by_type(content, path):
+
+    dirs = []
+    files = []
+
+    if path == '/':
+        path = DOCUMENTS
+    else:
+        path += '/'
+        print(path)
+
+    for item in content:
+        if os.path.isdir(path + item):
+            dirs.append(item)
+
+    for item in content:
+        if os.path.isfile(path + item):
+            files.append(item)
+
+    return dirs + files
 
 
 def get_dir_up(path):
 
-    if '/' in path:
+    if '/' in path and len(path) > 1:
         up = "/storage"
         path = path.split('/')
         size = len(path) - 1
@@ -81,7 +106,3 @@ def get_content_page(pages):
         page.append(item[1])
 
     return page
-
-
-def get_info_page(title, path, data):
-    pass
