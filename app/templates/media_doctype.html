@@ -1,0 +1,17 @@
+{% extends "base_template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+    {% include "components/top_nav.html" %}
+
+    <div class="container center ">
+        <p class="display-3">{{title}}</p>
+        <div class="embed-responsive embed-responsive-9by16">
+            <embed class="embed-responsive-item" src="/file/{{ path }}" type="application/pdf" width="100%" height="720" allowfullscreen>  
+        </div>
+    </div>
+
+{% endblock %}
+

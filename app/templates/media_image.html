@@ -1,0 +1,18 @@
+{% extends "base_template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+    {% include "components/top_nav.html" %}
+
+    <div class="container center">
+        <p class="display-4">{{title}}</p>
+        <img src="/file/{{ path }}" class="img-fluid" alt="Responsive image" alt="" srcset="">    
+    </div>
+
+
+    {% include "components/control_nav.html" %}
+
+{% endblock %}
+

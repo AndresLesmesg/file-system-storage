@@ -1,0 +1,57 @@
+{% extends "base_template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+        
+
+
+    {% include "components/top_nav.html" %}
+    
+    {% include "components/form_upload_file.html" %}
+    
+    <div class="container text-center">
+        <div>
+            
+            {% if path != '/' %}
+                <p class="display-3">{{path}} {{page}}</p>
+            {% endif %}
+            
+        </div>
+        <div class="list-group">
+            
+            {% for element in data %}
+
+            {% if element[2] == 'dir' %}
+                <a href="/storage/{{path}}/{{element[1]}}">
+                    <button class="btn btn-outline-primary btn-lg btn-block mb-3">
+                        {{ element[1] }}
+                    </button>
+                </a>
+            {% endif %}    
+            {% endfor %}
+        </div>
+        
+        <div class="d-flex justify-content-sm-around flex-wrap">
+            {% for element in data %}
+                {% if element[2] == 'file' %}
+                <a href="/storage/{{path}}/{{element[1]}}">
+                    <div class="card mb-md-3"  style="width: 20rem;">
+                        <img src="/file/{{path}}/{{element[1]}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text text-center strong">{{element[1]}}</p>
+                        </div>
+                    </div>                         
+                </a>
+                {% endif %}
+            {% endfor %}
+        </div>  
+    </div>
+
+    {% if info['finally'] > 0 %}
+        <br>
+        {% include 'components/pagination.html' %}
+    {% endif %}
+    
+
+    {% endblock %}
