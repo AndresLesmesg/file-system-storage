@@ -10,11 +10,15 @@ def content(path):
 
     up = get_dir_up(path)
 
+    
+
     if request.method == 'POST':
 
         return redirect(url_for('update', path))
+    
+    title = get_end_path(path)
 
-    if('.' in path):
+    if('.' in title):
         # redirect to doctype
         if('pdf' in path or 'PDF' in path):
 
@@ -63,8 +67,22 @@ def content(path):
     else:
 
         title = get_end_path(path)
-        data = get_content_dir(path)
+
+        # clear url encoding
+        if '%' in path:
+            clean_path = path
+            clean_path = clean_path.replace('%20', ' ')
+            clean_path = clean_path.replace('%26', '&')
+            clean_path = clean_path.replace('%28', '(')
+            clean_path = clean_path.replace('%29', ')')
+            
+        else :
+            clean_path = path
+
+
+        data = get_content_dir(clean_path)
         pages = get_pages(data)
+
 
         # Pagination
         if len(pages) > 1:

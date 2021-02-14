@@ -1,11 +1,10 @@
 import os
 
-DOCUMENTS = os.getenv('HOME')
-DOCUMENTS += '/Documentos/'
+STORAGE_DIR = os.getenv('STORAGE_DIR')
 
 
 def get_end_path(path):
-
+    
     if(path.endswith("/") and len(path) > 1):
         path = path.rstrip('/')
 
@@ -19,19 +18,17 @@ def get_end_path(path):
 
 
 def get_content_dir(path):
-
-    if (path != '/'):
-        path = str(DOCUMENTS + path)
-        if (os.path.exists(path)):
-            content = os.listdir(path)
-        else:
-            content = None
+    if(path == '/'):
+        content = os.listdir(STORAGE_DIR)
     else:
-        content = os.listdir(DOCUMENTS)
-
-    if(content is not None):
-        content.sort()
-        content = sort_by_type(content, path)
+        dir = STORAGE_DIR + path
+        if(os.path.exists(dir)):
+            content = os.listdir(dir)
+            if(content is not None):
+                content.sort()
+                content = sort_by_type(content, dir)
+        else:
+            content = None    
 
     return content
 
@@ -42,10 +39,9 @@ def sort_by_type(content, path):
     files = []
 
     if path == '/':
-        path = DOCUMENTS
+        path = STORAGE_DIR
     else:
         path += '/'
-        print(path)
 
     for item in content:
         if os.path.isdir(path + item):
@@ -91,7 +87,7 @@ def get_pages(data):
             i = 0
             x = x+1
             pages.append(list(void))
-        pages[x].append([index, item, data_type])
+        pages[x].append([i, item, data_type])
         index += 1
         i += 1
 
