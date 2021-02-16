@@ -3,14 +3,14 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-
+        
     {% include "components/top_nav.html" %}
     
     <div class="container text-center">
         <div>
             
             {% if path != '/' %}
-                <p class="display-3">{{path}} {{page}}</p>
+                <h3 class="display-3">{{title}}</h3>
             {% endif %}
             
         </div>
@@ -21,7 +21,7 @@
             {% if element[2] == 'dir' %}
                 <a href="/storage/{{path}}/{{element[1]}}">
                     <button class="btn btn-outline-primary btn-lg btn-block mb-3">
-                        {{ element[1] }}
+                        &#x1F4C1; {{ element[1] }}
                     </button>
                 </a>
             {% endif %}    

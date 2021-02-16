@@ -1,59 +1,65 @@
 <div class="d-flex justify-content-center">
     <nav aria-label="Page navigation example">
         <ul class="pagination">
+            
             {% if info['current'] != info['first'] %}
                 <li class="page-item">
-                    <a class="page-link" href="{{path}}?page={{info['first']}}" aria-label="Previous">
+                    <a class="page-link" href="?page={{info['first']}}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
             {% endif %}
+
             {% if info['previous'] != None %}
                 <li class="page-item">
-                    <a class="page-link" href="{{path}}?page={{info['previous']}}" aria-label="Previous">
+                    <a class="page-link" href="?page={{info['previous']}}" aria-label="Previous">
                         <span aria-hidden="true">&lsaquo;</span>
                     </a>
                 </li>
             {% endif %}
+
+            {% if info['current'] > 3 %}
+                <li class="page-item"><a class="page-link" href="#">...</a></li>
+            {% endif %}   
             
-            <li class="page-item"><a class="page-link" href="#">...</a></li>
             {%if info['current'] > info['first'] %}
                     {% if info['current'] >= 3 %}
                         {% for i in range(3) %}
-                            <li class="page-item"><a class="page-link" href="#">({{(info['current']+1)-(info['current']-i)}}</a></li>                            
+                            <li class="page-item"><a class="page-link" href="?page={{(info['current'])-(3-i)}}">{{(info['current']+1)-(3-i)}}</a></li>                            
                         {% endfor %}
                     {% else %}
                         {% for i in range(info['current']) %}
-                        <li class="page-item"><a class="page-link" href="#">{{(info['current']+1)-(info['current']-i)}}</a></li>       
+                        <li class="page-item"><a class="page-link" href="?page={{(info['current'])-(info['current']-i)}}">{{(info['current']+1)-(info['current']-i)}}</a></li>       
                         {% endfor %}
                     {% endif %}
             {% endif %}
-               
             <li class="page-item" ><a class="page-link" href="#" style="color: #fff; background-color: #007bff;">{{info['current'] + 1}}</a></li>
             
             {%if info['current'] < info['finally'] %}
                 {% if info['current'] < info['finally'] - 3 %}
                     {% for x in range(3) %}
-                        <li class="page-item"><a class="page-link" href="#">{{(info['current']+1)+(x+1)}}</a></li>                            
+                        <li class="page-item"><a class="page-link" href="?page={{(info['current'])+(x+1)}}">{{(info['current']+1)+(x+1)}}</a></li>                            
                     {% endfor %}
                 {% else %}
                     {% for x in range(info['finally']-info['current']) %}
-                        <li class="page-item"><a class="page-link" href="#">{{(info['current']+1)+(x+1)}}</a></li>       
+                        <li class="page-item"><a class="page-link" href="?page={{(info['current'])+(x+1)}}">{{(info['current']+1)+(x+1)}}</a></li>       
                     {% endfor %}
                 {% endif %}
             {% endif %}
-            <li class="page-item"><a class="page-link" href="#">...</a></li>
+            {% if info['finally'] - info['current'] > 3  %}
+                <li class="page-item"><a class="page-link" href="#">...</a></li>
+            {% endif %}
             
             {% if info['next'] != None %}
                 <li class="page-item">
-                    <a class="page-link" href="{{path}}?page={{info['next']}}" aria-label="Next">
+                    <a class="page-link" href="?page={{info['next']}}" aria-label="Next">
                         <span aria-hidden="true">&rsaquo;</span>
                     </a>
                 </li>
             {% endif %}
             {% if info['current'] != info['finally'] %}
                 <li class="page-item">
-                    <a class="page-link" href="{{path}}?page={{info['finally']}}" aria-label="Previous">
+                    <a class="page-link" href="?page={{info['finally']}}" aria-label="Previous">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
