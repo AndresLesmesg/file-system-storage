@@ -10,12 +10,10 @@ def content(path):
 
     up = get_dir_up(path)
 
-    
-
     if request.method == 'POST':
 
         return redirect(url_for('update', path))
-    
+
     title = get_end_path(path)
 
     if('.' in title):
@@ -75,14 +73,13 @@ def content(path):
             clean_path = clean_path.replace('%26', '&')
             clean_path = clean_path.replace('%28', '(')
             clean_path = clean_path.replace('%29', ')')
-            
-        else :
-            clean_path = path
+            clean_path = clean_path.replace('%2B', '+')
 
+        else:
+            clean_path = path
 
         data = get_content_dir(clean_path)
         pages = get_pages(data)
-
 
         # Pagination
         if len(pages) > 1:

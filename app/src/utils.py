@@ -4,7 +4,7 @@ STORAGE_DIR = os.getenv('STORAGE_DIR')
 
 
 def get_end_path(path):
-    
+
     if(path.endswith("/") and len(path) > 1):
         path = path.rstrip('/')
 
@@ -18,17 +18,16 @@ def get_end_path(path):
 
 
 def get_content_dir(path):
+    content = None
     if(path == '/'):
         content = os.listdir(STORAGE_DIR)
     else:
-        dir = STORAGE_DIR + path
+        dir = os.path.join(STORAGE_DIR, path)
         if(os.path.exists(dir)):
             content = os.listdir(dir)
             if(content is not None):
                 content.sort()
                 content = sort_by_type(content, dir)
-        else:
-            content = None    
 
     return content
 
