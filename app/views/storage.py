@@ -1,7 +1,8 @@
 from flask import render_template, request, redirect, url_for, flash
 
-from app.src.utils import get_end_path, get_dir_up, get_content_dir
-from app.src.utils import get_pages
+from app.src.utils import get_end_path, get_dir_up, get_clean_path
+from app.src.utils import get_content_dir, get_pages
+from app.src.format import imgs_type_file
 from . import views
 
 
@@ -9,75 +10,21 @@ from . import views
 def content(path):
 
     up = get_dir_up(path)
+    title = get_end_path(path)
 
     if request.method == 'POST':
 
         return redirect(url_for('update', path))
 
-    title = get_end_path(path)
-
     if('.' in title):
         # redirect to doctype
-        if('pdf' in path or 'PDF' in path):
+        return redirect(f'/media/{path}')
 
-            title = get_end_path(path)
-
-            return render_template(
-                'media_doctype.html',
-                title=title,
-                path=path)
-
-        # redirect to image
-        if('png' in path or 'jpg' in path or 'PNG' in path or 'JPG' in path):
-
-            title = get_end_path(path)
-            data = get_content_dir(get_dir_up(path))
-
-            # Control-nav-items
-            info = {
-                'current-file': title,
-                'previous-file': None,
-                'next-file': None,
-            }
-
-            current_id = 0
-
-            i = 0
-
-            for item in data:
-
-                if item == title:
-                    current_id = i
-                i += 1
-
-            if current_id is not None:
-                if current_id > 0:
-                    info['previous-file'] = data[current_id - 1]
-                if current_id < len(data) - 1:
-                    info['next-file'] = data[current_id + 1]
-
-            return render_template(
-                'media_image.html',
-                up=up,
-                path=path,
-                info=info,
-                title=title)
     else:
 
-        title = get_end_path(path)
-
         # clear url encoding
-        if '%' in path:
-            clean_path = path
-            clean_path = clean_path.replace('%20', ' ')
-            clean_path = clean_path.replace('%26', '&')
-            clean_path = clean_path.replace('%28', '(')
-            clean_path = clean_path.replace('%29', ')')
-            clean_path = clean_path.replace('%2B', '+')
 
-        else:
-            clean_path = path
-
+        clean_path = get_clean_path(path)
         data = get_content_dir(clean_path)
         pages = get_pages(data)
 
@@ -133,6 +80,7 @@ def content(path):
             'index.html',
             up=up,
             path=path,
+            img=imgs_type_file,
             title=title,
             info=info,
             data=data)

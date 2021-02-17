@@ -1,3 +1,5 @@
+from app.src.format import type_file_list
+
 import os
 
 STORAGE_DIR = os.getenv('STORAGE_DIR')
@@ -15,6 +17,20 @@ def get_end_path(path):
         title = path
 
     return title
+
+
+def get_clean_path(path):
+    if '%' in path:
+        clean_path = path
+        clean_path = clean_path.replace('%20', ' ')
+        clean_path = clean_path.replace('%26', '&')
+        clean_path = clean_path.replace('%28', '(')
+        clean_path = clean_path.replace('%29', ')')
+        clean_path = clean_path.replace('%2B', '+')
+    else:
+        clean_path = path
+
+    return clean_path
 
 
 def get_content_dir(path):
@@ -86,18 +102,22 @@ def get_pages(data):
             i = 0
             x = x+1
             pages.append(list(void))
-        pages[x].append([i, item, data_type])
+        if data_type == 'file':
+            pages[x].append([i, item, data_type, add_ext_file(item)])
+        else:
+            pages[x].append([i, item, data_type])
         index += 1
         i += 1
 
     return pages
 
 
-def get_content_page(pages):
+def add_ext_file(data):
+    if data.startswith('.'):
+        return 'hidden'
+    for ext_list in type_file_list:
+        for ext in type_file_list[ext_list]:
+            if(data.lower().endswith(ext)):
+                return ext_list
 
-    page = []
-
-    for item in pages:
-        page.append(item[1])
-
-    return page
+    return 'undefined'

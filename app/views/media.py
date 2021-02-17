@@ -4,16 +4,6 @@ from . import views
 
 
 @views.route('/media/<path:path>')
-def render_media():
+def render_media(path):
 
-    # if img
-
-    # if doctype
-
-    # if video
-
-    # if sound
-
-    # if none_type
-
-    pass
+    return f"media {path}"
