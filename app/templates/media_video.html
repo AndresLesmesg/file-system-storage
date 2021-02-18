@@ -1,0 +1,18 @@
+{% extends "base_template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+    {% include "components/top_nav.html" %}
+
+    <div class="container-fluid center justify.content-center container-media">
+        <h1 class="display-5">{{title}}</p>
+            <video src="/file/{{path}}" width="100%" controls>
+                <source src="/file/{{path}}" type="video/mp4">
+            </video>
+        </div>
+        
+    {% include "components/control_nav.html" %}
+
+{% endblock %}

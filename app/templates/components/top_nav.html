@@ -1,16 +1,16 @@
-
-<ul class="nav justify-content-center">
+<div class="navtop">
+  <ul class="nav justify-content-center">
     {% if path != '/' %}
-        <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link active" href="/">Home</a>
-        </li>
+      </li>
     {% endif %}
     {% if path != '/' %}
-        <li class="nav-item">
-        <a class="nav-link" href="{{up}}"><span>&uarr;</span> Up Dir</a>
-        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{up}}"><span>&uarr;</span> Up Dir</a>          
+      </li>
     {% endif %}
-    
+      
     <li class="nav-item">
       <a class="nav-link disabled" href="#" aria-disabled="true">+ New Dir</a>
     </li>
@@ -18,4 +18,6 @@
       <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Update File</a>
     </li>
   </ul>
+
+</div>
 

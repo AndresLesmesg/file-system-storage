@@ -20,6 +20,7 @@ def get_end_path(path):
 
 
 def get_clean_path(path):
+
     if '%' in path:
         clean_path = path
         clean_path = clean_path.replace('%20', ' ')
@@ -33,23 +34,48 @@ def get_clean_path(path):
     return clean_path
 
 
+def is_path_exist(path):
+    path = os.path.join(STORAGE_DIR, path)
+    if(os.path.exists(path)):
+        return True
+
+    return False
+
+
+def is_file(path):
+    path = os.path.join(STORAGE_DIR, path)
+    if(os.path.isfile(path)):
+        return True
+
+    return False
+
+
 def get_content_dir(path):
     content = None
     if(path == '/'):
-        content = os.listdir(STORAGE_DIR)
+        dir = STORAGE_DIR
+        content = os.listdir(dir)
+
     else:
         dir = os.path.join(STORAGE_DIR, path)
         if(os.path.exists(dir)):
             content = os.listdir(dir)
-            if(content is not None):
-                content.sort()
-                content = sort_by_type(content, dir)
+
+    if(content is not None):
+        content.sort()
+        content = sort_by_type(content, dir)
+        content = add_index_content(content)
 
     return content
 
 
-def sort_by_type(content, path):
+def add_index_content(content):
+    for x in range(len(content)):
+        content[x].insert(0, x)
+    return content
 
+
+def sort_by_type(content, path):
     dirs = []
     files = []
 
@@ -60,11 +86,11 @@ def sort_by_type(content, path):
 
     for item in content:
         if os.path.isdir(path + item):
-            dirs.append(item)
+            dirs.append([item, 'dir'])
 
     for item in content:
         if os.path.isfile(path + item):
-            files.append(item)
+            files.append([item, 'file', add_ext_file(item)])
 
     return dirs + files
 
@@ -89,26 +115,18 @@ def get_pages(data):
 
     pages = [[]]
     void = []
-    index = 0
     i = 0
     x = 0
 
     for item in data:
-        data_type = 'dir'
-        if '.' in item:
-            data_type = 'file'
-
         if i == 24:
-            i = 0
-            x = x+1
             pages.append(list(void))
-        if data_type == 'file':
-            pages[x].append([i, item, data_type, add_ext_file(item)])
-        else:
-            pages[x].append([i, item, data_type])
-        index += 1
+            x = x + 1
+            i = 0
+        pages[x].append([x, item])
         i += 1
 
+    data = []
     return pages
 
 
@@ -121,3 +139,39 @@ def add_ext_file(data):
                 return ext_list
 
     return 'undefined'
+
+
+def get_files(data):
+    files = []
+    for item in data:
+        if item[2] == 'file':
+            files.append(item)
+
+    return files
+
+
+def get_next_file(data, filename):
+    file = False
+    for item in data:
+        if file and (item[3] != 'undefined' and item[3] != 'hidden'):
+            return item[1]
+        if item[1] == filename:
+            file = True
+    return None
+
+
+def get_previous_file(data, filename):
+    file = ''
+    for item in data:
+        if item[1] == filename:
+            return file
+        if(item[3] != 'undefined' and item[3] != 'hidden'):
+            file = item[1]
+    return None
+
+
+def get_content(data, filename):
+    for item in data:
+        if item[1] == filename:
+            return item
+    return None

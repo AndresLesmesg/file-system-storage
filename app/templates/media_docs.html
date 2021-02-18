@@ -1,0 +1,17 @@
+{% extends "base_template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+    {% include "components/top_nav.html" %}
+
+    <div class="container-fluid container-media center ">
+        <h1 class="display-5">{{title}}</h1>
+        <embed src="/file/{{path}}#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="720">  
+    </div>
+
+    {% include "components/control_nav.html" %}
+
+{% endblock %}
+

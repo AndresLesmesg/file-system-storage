@@ -1,11 +1,11 @@
 <nav class="nav nav-pills flex-column flex-lg-row">
     
-    {% if info['previous-file'] != None %}
-        <a class="flex-lg-fill text-lg-center nav-link btn-outline-primary" href="{{up}}/{{info['previous-file']}}" >previous</a>
+    {% if info['previous'] != None %}
+        <a class="flex-lg-fill text-lg-center nav-link btn-outline-primary" href="{{up}}/{{info['previous']}}" >previous</a>
     {% endif %}
 
-    {% if info['next-file'] != None %}
-        <a class="flex-lg-fill text-lg-center nav-link btn-outline-primary" href="{{up}}/{{info['next-file']}}">Next</a>
+    {% if info['next'] != None %}
+        <a class="flex-lg-fill text-lg-center nav-link btn-outline-primary" href="{{up}}/{{info['next']}}">Next</a>
     {% endif %}
     
 </nav>

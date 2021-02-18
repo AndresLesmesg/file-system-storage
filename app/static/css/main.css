@@ -1,6 +1,20 @@
 a:hover  {
     text-decoration: none !important;
 }
+img{
+    display:block;
+    margin:auto;
+}
+.navtop {
+  padding: 1rem 0rem;
+  font-size: 1.7rem;
+}
+.container-media {
+    max-width: 80hw;
+    height: 80hw !important;
+    align-items: center;
+}
+
 .dir {
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
@@ -17,6 +31,9 @@ a:hover  {
 @media(max-width: 750px) {
     .card {
         margin-bottom: 0.75rem !important;
+    }
+    .navtop {
+        font-size: 1.2rem;
     }
 }
 @media(max-width: 600px){

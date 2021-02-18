@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash
 
 from app.src.utils import get_end_path, get_dir_up, get_clean_path
-from app.src.utils import get_content_dir, get_pages
+from app.src.utils import get_content_dir, get_pages, is_file
 from app.src.format import imgs_type_file
 from . import views
 
@@ -11,20 +11,19 @@ def content(path):
 
     up = get_dir_up(path)
     title = get_end_path(path)
+    clean_path = get_clean_path(path)
 
     if request.method == 'POST':
 
         return redirect(url_for('update', path))
 
-    if('.' in title):
+    if(is_file(clean_path)):
         # redirect to doctype
         return redirect(f'/media/{path}')
 
     else:
 
         # clear url encoding
-
-        clean_path = get_clean_path(path)
         data = get_content_dir(clean_path)
         pages = get_pages(data)
 

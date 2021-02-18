@@ -1,7 +1,7 @@
 # file list
 type_file_list = {
     'docs': ['pdf', 'txt'],
-    'image': ['png', 'jpg', 'jpeg', 'bmp'],
+    'image': ['png', 'jpg', 'jpeg', 'bmp', 'ico'],
     'image-no-render': ['psd'],
     'sound': ['mp3'],
     'vector': ['svg', 'ia'],

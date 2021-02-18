@@ -5,12 +5,11 @@
 {% block content %}
 
     {% include "components/top_nav.html" %}
-
-    <div class="container center">
+    
+    <div class="container-fluid center justify-content-center container-media">
         <p class="display-4">{{title}}</p>
-        <img src="/file/{{ path }}" class="img-fluid" alt="Responsive image" alt="" srcset="">    
+        <img src="/file/{{ path }}" alt="Responsive image" alt="{{title}}" srcset="">    
     </div>
-
 
     {% include "components/control_nav.html" %}
 
