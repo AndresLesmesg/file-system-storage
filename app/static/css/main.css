@@ -1,19 +1,26 @@
 a:hover  {
     text-decoration: none !important;
 }
-
+.dir {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+.card {
+    padding-top: 0.5rem;
+    font-size: 1.2rem;
+}
 .card:hover {
-    border: 2px solid;
+    border: -2px solid;
     border-color: #007bff;
 }
 
-@media(max-width: 600px){
-    .main-box {
-        justify-content: center;
-    }
-}
 @media(max-width: 750px) {
     .card {
         margin-bottom: 0.75rem !important;
+    }
+}
+@media(max-width: 600px){
+    .main-box {
+        justify-content: center;
     }
 }

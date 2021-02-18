@@ -14,7 +14,7 @@ imgs_type_file = {
     'image-no-render': '📷',
     'sound': '🎵',
     'vector': '🌃',
-    'video': '🎞;',
+    'video': '🎞',
     'compressed': '📦',
     'hidden': '⛔',
     'undefined': '❓',

@@ -10,7 +10,7 @@
         <div>
             
             {% if path != '/' %}
-                <h3 class="display-3">{{title}}</h3>
+                <h3 class="display-4">{{title}}</h3>
             {% endif %}
             
         </div>
@@ -20,7 +20,7 @@
 
             {% if element[2] == 'dir' %}
                 <a href="/storage/{{path}}/{{element[1]}}">
-                    <button class="btn btn-outline-primary btn-lg btn-block mb-3">
+                    <button class="btn btn-outline-primary btn-lg btn-block mb-3 dir">
                         &#x1F4C1; {{ element[1] }}
                     </button>
                 </a>
